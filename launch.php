@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 $game = new Game(
-    new Player('player1', 'battle.php', true),
-    new Player('player2', 'battle.php', true)
+    new Player('player1', 'battle_p1.php', true),
+    new Player('player2', 'battle_p2.php', true)
 );
 
 $count = 0;
@@ -89,9 +89,10 @@ class Player {
 
     public function __construct(string $name, string $script, bool $debug = false)
     {
-        if (basename($script) !== 'battle.php') {
+        if (!$debug && basename($script) !== 'battle.php') {
             throw new RuntimeException('battle script must be base named "battle.php"');
         }
+
         $script = realpath($script);
         if ($script === false) {
             throw new RuntimeException('Could not found script');
